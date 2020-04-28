@@ -1,0 +1,17 @@
+C:\Users\asdfg\Documents\git\TwitchChatBox\bin\Release\TwitchChatBox.exe.config
+C:\Users\asdfg\Documents\git\TwitchChatBox\bin\Release\TwitchChatBox.exe
+C:\Users\asdfg\Documents\git\TwitchChatBox\bin\Release\TwitchChatBox.pdb
+C:\Users\asdfg\Documents\git\TwitchChatBox\bin\Release\System.Net.Json.dll
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\TwitchChatBox.csprojAssemblyReference.cache
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\MainWindow.g.cs
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\App.g.cs
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\TwitchChatBox_MarkupCompile.cache
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\TwitchChatBox_MarkupCompile.lref
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\MainWindow.baml
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\TwitchChatBox.g.resources
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\TwitchChatBox.Properties.Resources.resources
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\TwitchChatBox.csproj.GenerateResource.cache
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\TwitchChatBox.csproj.CoreCompileInputs.cache
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\TwitchChatBox.csproj.CopyComplete
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\TwitchChatBox.exe
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\TwitchChatBox.pdb

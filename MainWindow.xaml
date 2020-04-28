@@ -5,12 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TwitchChatBox"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" WindowState="Maximized" Cursor="None" Topmost="True">
     <Grid>
         <TextBox 
             Name="tbSettingText"
             TextWrapping="Wrap"
-            AcceptsReturn="True"
+            AcceptsReturn="True" Margin="120,130,120,126"
+            Background="Transparent" FontSize="24" IsReadOnly="True" Foreground="White" TextAlignment="Center" BorderThickness="0"
         >
             Initial text contents of the TextBox.
         </TextBox>

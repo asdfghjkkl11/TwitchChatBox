@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Release\
 TwitchChatBox
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\asdfg\Documents\git\TwitchChatBox\App.xaml
 11151548125
 
