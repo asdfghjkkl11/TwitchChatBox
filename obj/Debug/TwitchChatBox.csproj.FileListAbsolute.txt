@@ -1,0 +1,17 @@
+C:\Users\asdfg\Documents\git\TwitchChatBox\bin\Debug\TwitchChatBox.exe.config
+C:\Users\asdfg\Documents\git\TwitchChatBox\bin\Debug\TwitchChatBox.exe
+C:\Users\asdfg\Documents\git\TwitchChatBox\bin\Debug\TwitchChatBox.pdb
+C:\Users\asdfg\Documents\git\TwitchChatBox\bin\Debug\System.Net.Json.dll
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\TwitchChatBox.csprojAssemblyReference.cache
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\MainWindow.g.cs
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\App.g.cs
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\TwitchChatBox_MarkupCompile.cache
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\TwitchChatBox_MarkupCompile.lref
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\MainWindow.baml
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\TwitchChatBox.g.resources
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\TwitchChatBox.Properties.Resources.resources
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\TwitchChatBox.csproj.GenerateResource.cache
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\TwitchChatBox.csproj.CoreCompileInputs.cache
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\TwitchChatBox.csproj.CopyComplete
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\TwitchChatBox.exe
+C:\Users\asdfg\Documents\git\TwitchChatBox\obj\Debug\TwitchChatBox.pdb

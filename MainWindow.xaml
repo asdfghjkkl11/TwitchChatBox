@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <TextBox 
+            Name="tbSettingText"
+            TextWrapping="Wrap"
+            AcceptsReturn="True"
+        >
+            Initial text contents of the TextBox.
+        </TextBox>
     </Grid>
 </Window>

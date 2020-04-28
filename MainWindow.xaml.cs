@@ -17,9 +17,17 @@ namespace TwitchChatBox
 {
     public partial class MainWindow : Window
     {
+        JsonLoader jsonlaoder = new JsonLoader();
+        
         public MainWindow()
         {
             InitializeComponent();
+            jsonlaoder.GetData();
+            tbSettingText.Text = jsonlaoder.Address + '\n';
+            tbSettingText.Text += jsonlaoder.Ports + '\n';
+            tbSettingText.Text += jsonlaoder.Nickname + '\n';
+            tbSettingText.Text += jsonlaoder.Password + '\n';
+            tbSettingText.Text += jsonlaoder.Channel + '\n';
         }
     }
 }
