@@ -3,5 +3,6 @@
 	"Ports": "6667",
 	"Password": "",
 	"Nickname": "",
-	"Channel": ""
+	"Channel": "",
+	"Color": "#FFFFFF"
 }
