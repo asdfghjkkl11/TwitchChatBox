@@ -2,17 +2,20 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Windows;
-
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace TwitchChatBox
 {
     public partial class MainWindow : Window
     {
         JsonLoader jsonlaoder = new JsonLoader();
+        string chat = "";
         public MainWindow()
         {
             InitializeComponent();
-            
+            //this.Loaded += new RoutedEventHandler(Window1_Loaded);
             System.Threading.Thread thread1 = new System.Threading.Thread(
             new System.Threading.ThreadStart(
                 delegate ()
@@ -25,32 +28,75 @@ namespace TwitchChatBox
                     {
                         // Read any message from the chat room
                         string message = irc.ReadMessage();
-                        Console.WriteLine(message);
+                        //Console.WriteLine(message);
                         // Print raw irc messages
-                        System.Windows.Threading.DispatcherOperation
-                            dispatcherOp = tbSettingText.Dispatcher.BeginInvoke(
-                            System.Windows.Threading.DispatcherPriority.Normal,
-                            new Action(
-                            delegate ()
-                            {
-                                tbSettingText.Text = message;
-                            }
-                        ));
                         if (message.Contains("PRIVMSG"))
                         {
                             // Messages from the users will look something like this (without quotes):
-                            // Format: ":[user]![user]@[user].tmi.twitch.tv PRIVMSG #[channel] :[message]"
+                            // Format: "@badge-info=;badges=;color=;display-name=;emotes=;flags=;id=;mod=;room-id=;subscriber=;tmi-sent-ts=;turbo=;user-id=;user-type= :[user]![user]@[user].tmi.twitch.tv PRIVMSG #[channel] :[message]"
+                            // parse messages
+                            string[] strs1 = message.Split(';');
+                            string str = strs1[13];
+                            if (strs1.Length > 14)
+                            {
+                                for(int i=14;i< strs1.Length; i++)
+                                {
+                                    str += strs1[i];
+                                }
+                            }                       
+                            string[] strs2 = str.Split(':');
 
-                            // Modify message to only retrieve user and message
-                            int intIndexParseSign = message.IndexOf('!');
-                            string userName = message.Substring(1, intIndexParseSign - 1); // parse username from specific section (without quotes)
-                                                                                           // Format: ":[user]!"
-                                                                                           // Get user's message
-                            intIndexParseSign = message.IndexOf(" :");
-                            message = message.Substring(intIndexParseSign + 2);
+                            string color = strs1[2].Split('=')[1];
+                            string displayName = strs1[3].Split('=')[1];
+                            string userName = strs2[1].Split('!')[0];
+                            string msg = strs2[2];
+                            chat = displayName + "(" + userName + "): " + msg;
+                            
+                            System.Windows.Threading.DispatcherOperation
+                            dispatcherOp = canvas.Dispatcher.BeginInvoke(
+                                System.Windows.Threading.DispatcherPriority.Normal,
+                                new Action(
+                                delegate ()
+                                {
+                                    TextBlock textBlock = new TextBlock();
+                                    textBlock.Text = chat;
+                                    textBlock.Foreground = Brushes.White;
+                                    textBlock.FontSize = 30;
+                                    Canvas.SetTop(textBlock, 200);
+                                    canvas.Children.Add(textBlock);
+                                    double right = 0;
+                                    FrameworkElement parent = textBlock.Parent as FrameworkElement;
 
-                            //Console.WriteLine(message); // Print parsed irc message (debugging only)
+                                    // 텍스트의 길이가 부모 패널을 넘어갈 때 
+                                    if (textBlock.ActualWidth > parent.ActualWidth)
+                                    {
+                                        right = textBlock.ActualWidth - parent.ActualWidth;
+                                    }
+                                    // TranslateTransform을 생성해야 애니메이션 적용
+                                    textBlock.RenderTransform = new TranslateTransform();
 
+                                    Storyboard story = new Storyboard();
+
+                                    DoubleAnimation animation = new DoubleAnimation();
+
+                                    animation.From = parent.ActualWidth;
+                                    animation.To = -(parent.ActualWidth + right);
+                                    animation.Duration = TimeSpan.FromSeconds(10);
+
+                                    // TranslateTransform.XProperty 값 설정
+                                    DependencyProperty[] Dproperty = new DependencyProperty[]
+                                    {
+                                        TextBlock.RenderTransformProperty,
+                                        TranslateTransform.XProperty
+                                    };
+
+                                    string path = "(0).(1)";
+
+                                    Storyboard.SetTargetProperty(animation, new PropertyPath(path, Dproperty));
+                                    story.Children.Add(animation);
+                                    story.Begin(textBlock);
+                                }
+                            ));
                         }
                     }
                 }

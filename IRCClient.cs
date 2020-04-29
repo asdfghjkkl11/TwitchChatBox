@@ -25,6 +25,7 @@ namespace TwitchChatBox
                 _outputStream = new StreamWriter(_tcpClient.GetStream());
 
                 // Try to join the room
+                _outputStream.WriteLine("CAP REQ : twitch.tv/tags twitch.tv/commands twitch.tv/membership");
                 _outputStream.WriteLine("PASS " + password);
                 _outputStream.WriteLine("NICK " + userName);
                 _outputStream.WriteLine("USER " + userName + " 8 * :" + userName);

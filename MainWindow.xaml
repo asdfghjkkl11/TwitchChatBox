@@ -9,14 +9,11 @@
         Background="Transparent"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None" WindowState="Maximized" Cursor="None" Topmost="True">
-    <Grid>
-        <TextBox 
-            Name="tbSettingText"
-            TextWrapping="Wrap"
-            AcceptsReturn="True" Margin="120,130,120,126"
-            Background="Transparent" FontSize="24" IsReadOnly="True" Foreground="White" TextAlignment="Center" BorderThickness="0"
+    <StackPanel>
+        <Canvas
+            Name="canvas"
+            Background="Transparent"
         >
-            Initial text contents of the TextBox.
-        </TextBox>
-    </Grid>
+        </Canvas>
+    </StackPanel>
 </Window>
