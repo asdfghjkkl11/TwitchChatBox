@@ -76,7 +76,7 @@ namespace TwitchChatBox{
             Text.Inlines.Add(new Run(chat[0]) { Foreground = brush1 });
             Text.Inlines.Add(new Run(chat[1]) { Foreground = brush2 });
             Text.FontSize = 30;
-            Canvas.SetTop(Text, 200);
+            Canvas.SetTop(Text, random());
             canvas.Children.Add(Text);
             double right = 0;
 
@@ -104,6 +104,24 @@ namespace TwitchChatBox{
             story.Completed += (s, e) => canvas.Children.Remove(Text);
             story.Begin(Text);
             
+        }
+        double random(){
+            Random r = new Random();
+            FrameworkElement parent = canvas.Parent as FrameworkElement;
+            int height = (int)parent.ActualHeight;
+            int rand = r.Next(0, height * 2);
+            Console.WriteLine(rand);
+            if (rand < height/10)
+            {
+                return rand;
+            }else if (rand > height * 1.9)
+            {
+                return rand - (height * 1.1);
+            }else{
+                rand *= 8;
+                rand += height;
+                return rand/18;
+            }
         }
     }
 }
