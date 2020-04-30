@@ -20,12 +20,12 @@ namespace TwitchChatBox{
             JsonTextParser jtr = new JsonTextParser();
             JsonObject jo = jtr.Parse(strReturnValue);
             JsonObjectCollection jac = (JsonObjectCollection)jo;
-            Address = jac["Address"].GetValue().ToString();
-            Ports = int.Parse(jac["Ports"].GetValue().ToString());
-            Password = jac["Password"].GetValue().ToString();
-            Nickname = jac["Nickname"].GetValue().ToString();
-            Channel = jac["Channel"].GetValue().ToString();
-            Color = jac["Color"].GetValue().ToString();
+            Address = (jac["Address"].GetValue() != null) ? jac["Address"].GetValue().ToString() : "irc.twitch.tv";
+            Ports = (jac["Ports"].GetValue() != null) ? int.Parse(jac["Ports"].GetValue().ToString()) : 6667;
+            Password = (jac["Password"].GetValue() != null) ? jac["Password"].GetValue().ToString() : "";
+            Nickname = (jac["Nickname"].GetValue() != null) ? jac["Nickname"].GetValue().ToString() : "";
+            Channel = (jac["Channel"].GetValue() != null) ? jac["Channel"].GetValue().ToString() : "";
+            Color = (jac["Color"].GetValue()!=null) ? jac["Color"].GetValue().ToString() : "#FFFFFF";
         }
     }
 }

@@ -8,9 +8,12 @@ using System.Windows.Media.Animation;
 namespace TwitchChatBox{
     public partial class MainWindow : Window{
         JsonLoader jsonlaoder = new JsonLoader();
+        DependencyProperty[] Dproperty = new DependencyProperty[]{
+                TextBlock.RenderTransformProperty,
+                TranslateTransform.XProperty
+            };
         public MainWindow(){
             InitializeComponent();
-            //this.Loaded += new RoutedEventHandler(Window1_Loaded);
             System.Threading.Thread thread1 = new System.Threading.Thread(
             new System.Threading.ThreadStart(
                 delegate (){
@@ -21,11 +24,9 @@ namespace TwitchChatBox{
                     while (true){
                         // Read any message from the chat room
                         string message = irc.ReadMessage();
-                        //Console.WriteLine(message);
                         // Print raw irc messages
                         if (message.Contains("PRIVMSG")){
-                            System.Windows.Threading.DispatcherOperation
-                            dispatcherOp = canvas.Dispatcher.BeginInvoke(
+                            canvas.Dispatcher.BeginInvoke(
                                 System.Windows.Threading.DispatcherPriority.Normal,
                                 new Action(
                                 delegate (){
@@ -67,7 +68,7 @@ namespace TwitchChatBox{
         {
             TextBlock Text = new TextBlock();
             Brush brush1, brush2;
-
+            Console.WriteLine(chat[2]);
             brush1 = (chat[2] != "") ? (SolidColorBrush)(new BrushConverter().ConvertFrom(chat[2])) : Brushes.Green;
             brush2 = (jsonlaoder.Color != "") ? (SolidColorBrush)(new BrushConverter().ConvertFrom(jsonlaoder.Color)) : Brushes.White;
     
@@ -96,16 +97,13 @@ namespace TwitchChatBox{
             animation.Duration = TimeSpan.FromSeconds(10);
 
             // TranslateTransform.XProperty 값 설정
-            DependencyProperty[] Dproperty = new DependencyProperty[]{
-                TextBlock.RenderTransformProperty,
-                TranslateTransform.XProperty
-            };
-
             string path = "(0).(1)";
 
             Storyboard.SetTargetProperty(animation, new PropertyPath(path, Dproperty));
             story.Children.Add(animation);
+            story.Completed += (s, e) => canvas.Children.Remove(Text);
             story.Begin(Text);
+            
         }
     }
 }
