@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Collections.Generic;
 
 namespace TwitchChatBox{
     public partial class MainWindow : Window{
@@ -30,8 +31,7 @@ namespace TwitchChatBox{
                                 System.Windows.Threading.DispatcherPriority.Normal,
                                 new Action(
                                 delegate (){
-                                    string[] chat = splitMessage(message);
-                                    animate(chat);
+                                    animate(splitMessage(message));
                                 }
                             ));
                         }
@@ -40,41 +40,41 @@ namespace TwitchChatBox{
             ));
             thread1.Start();
         }
-        public string[] splitMessage(string message)
+        public Dictionary<string, string> splitMessage(string ircMessage)
         {
             // Messages from the users will look something like this (without quotes):
             // Format: "@badge-info=;badges=;color=;display-name=;emotes=;flags=;id=;mod=;room-id=;subscriber=;tmi-sent-ts=;turbo=;user-id=;user-type= :[user]![user]@[user].tmi.twitch.tv PRIVMSG #[channel] :[message]"
             // parse messages
-            string[] strs1 = message.Split(';');
-            string str = strs1[13];
-            if (strs1.Length > 14){
-                for (int i = 14; i < strs1.Length; i++){
-                    str += strs1[i];
-                }
-            }
-            string[] strs2 = str.Split(':');
+            Console.WriteLine(ircMessage);
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+            string[] strs0 = ircMessage.Split('@');
+            string[] strs1 = strs0[1].Split(' ');
+            string[] strs2 = strs1[0].Split(';');
+            string[] strs3 = strs1[1].Split('!');
+            string nickname = strs3[1];
+            string message = strs0[2].Replace(nickname+ ".tmi.twitch.tv PRIVMSG #"+jsonlaoder.Channel, "");
 
-            string color = strs1[2].Split('=')[1];
-            string displayName = strs1[3].Split('=')[1];
-            string userName = strs2[1].Split('!')[0];
-            string msg = strs2[2];
-            string[] res = new string[3];
-            res[0] = displayName + "(" + userName + ")";
-            res[1] = ": " + msg;
-            res[2] = color;
-            return res;
+            for (int i=0;i<strs2.Length;i++){
+                string[] strs = strs2[i].Split('=');
+                dictionary.Add(strs[0],strs[1]);
+            }
+            dictionary.Add("message", message);
+            dictionary.Add("nickname", nickname);
+            return dictionary;
         }
-        public void animate(string[] chat)
+        public void animate(Dictionary<string, string> parsedMessage)
         {
             TextBlock Text = new TextBlock();
             Brush brush1, brush2;
-            Console.WriteLine(chat[2]);
-            brush1 = (chat[2] != "") ? (SolidColorBrush)(new BrushConverter().ConvertFrom(chat[2])) : Brushes.Green;
+            string name = parsedMessage["display-name"]+"("+ parsedMessage["nickname"] + ")";
+            string message = parsedMessage["message"];
+            string color = parsedMessage["color"];
+            brush1 = (color != "") ? (SolidColorBrush)(new BrushConverter().ConvertFrom(color)) : Brushes.Green;
             brush2 = (jsonlaoder.Color != "") ? (SolidColorBrush)(new BrushConverter().ConvertFrom(jsonlaoder.Color)) : Brushes.White;
     
             Text.Inlines.Clear();
-            Text.Inlines.Add(new Run(chat[0]) { Foreground = brush1 });
-            Text.Inlines.Add(new Run(chat[1]) { Foreground = brush2 });
+            Text.Inlines.Add(new Run(name) { Foreground = brush1 });
+            Text.Inlines.Add(new Run(message) { Foreground = brush2 });
             Text.FontSize = 30;
             Canvas.SetTop(Text, random());
             canvas.Children.Add(Text);
